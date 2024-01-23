@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+  const StartScreen(this.switchState, {super.key});
+
+  final void Function() switchState;
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +12,9 @@ class StartScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-              'assets/images/quiz-logo.png',
-              width: 300,
-              color: const Color.fromARGB(150, 255, 255, 255),
+            'assets/images/quiz-logo.png',
+            width: 300,
+            color: const Color.fromARGB(150, 255, 255, 255),
           ),
           // Opacity(
           //   opacity: 0.5,
@@ -32,12 +34,16 @@ class StartScreen extends StatelessWidget {
             height: 30,
           ),
           OutlinedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                switchState();
+              },
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white,
               ),
               icon: const Icon(Icons.arrow_right_alt),
-              label: const Text('Start Quiz',))
+              label: const Text(
+                'Start Quiz',
+              ))
         ],
       ),
     );
