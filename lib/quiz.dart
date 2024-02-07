@@ -35,10 +35,16 @@ class _QuizScreenState extends State<QuizScreen> {
 
     if (selectedAnswer.length == questions.length) {
       setState(() {
-        // selectedAnswer = [];
         activeScreen = 'Result Screen';
       });
     }
+  }
+
+  void restartQuiz() {
+    setState(() {
+      selectedAnswer = [];
+      activeScreen = 'Question Screen';
+    });
   }
 
   @override
@@ -54,9 +60,14 @@ class _QuizScreenState extends State<QuizScreen> {
         ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
         child: activeScreen == 'Start Screen'
             ? StartScreen(switchScreen)
-            : activeScreen == 'Question Screen'? QuestionsScreen(
-                onSelectAnswers: chooseAnswer,
-              ): ResultsScreen(chosenAnswers: selectedAnswer,),
+            : activeScreen == 'Question Screen'
+                ? QuestionsScreen(
+                    onSelectAnswers: chooseAnswer,
+                  )
+                : ResultsScreen(
+                    chosenAnswers: selectedAnswer,
+                    onRestart: restartQuiz,
+                  ),
       )),
     );
   }
